@@ -1,12 +1,14 @@
 # ---------------[ Unity generated ]------------------ #
 
-/Temp
+/client/Temp
 
-/obj
+/client/obj
 
-/UnityGenerated
+/client/UnityGenerated
 
-/Library
+/client/Library
+
+/UI/.objs
 
  
 
