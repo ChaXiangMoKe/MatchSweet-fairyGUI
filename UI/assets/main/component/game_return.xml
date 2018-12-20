@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="400,400" extention="Button">
+  <displayList>
+    <image id="n1_dlzc" name="n1" src="dlzct" fileName="image/ui/game/PinkButton.png" xy="0,0" size="400,400" locked="true">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n0_dlzc" name="n0" src="dlzcu" fileName="image/ui/game/Repeat.png" xy="41,41" size="316,316" aspect="true">
+      <relation target="n1_dlzc" sidePair="width-width,height-height"/>
+    </image>
+  </displayList>
+  <Button downEffect="dark" downEffectValue="0.80"/>
+</component>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="z8rzzhse" jpegQuality="80" compressPNG="true">
+  <resources>
+    <image id="dlzc0" name="Stripes.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc1" name="BiscuitShadow.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc2" name="EclipseShine.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc3" name="RadialShine.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc4" name="RingBig.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc5" name="RingSmall.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc6" name="Star1.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc7" name="Star2.png" path="/image/effects/" exported="true"/>
+    <image id="dlzc8" name="Yellow.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzc9" name="Biscuit.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzca" name="BiscuitSpiral.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzcb" name="Blue.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzcc" name="Colors.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzcd" name="Green.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzce" name="Pink.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzcf" name="Purple.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzcg" name="Red.png" path="/image/sweets/" exported="true"/>
+    <image id="dlzch" name="PurpleBubble.png" path="/image/ui/game/bubbles/" exported="true"/>
+    <image id="dlzci" name="YellowBubble.png" path="/image/ui/game/bubbles/" exported="true"/>
+    <image id="dlzcj" name="BlueBubble.png" path="/image/ui/game/bubbles/" exported="true"/>
+    <image id="dlzck" name="GrassGreenBubble.png" path="/image/ui/game/bubbles/" exported="true"/>
+    <image id="dlzcl" name="GreenBubble.png" path="/image/ui/game/bubbles/" exported="true"/>
+    <image id="dlzcm" name="OrangeBubble.png" path="/image/ui/game/bubbles/" exported="true"/>
+    <image id="dlzcn" name="PinkBubble.png" path="/image/ui/game/bubbles/" exported="true"/>
+    <image id="dlzco" name="TopInfoBox.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcp" name="Background.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcq" name="BottomBar.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcr" name="ChocoBackground.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcs" name="Hand.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzct" name="PinkButton.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcu" name="Repeat.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcv" name="SpiralShadow.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcw" name="SquareLight.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcx" name="TopBar.png" path="/image/ui/game/" exported="true"/>
+    <image id="dlzcy" name="PlayGamePopupCream.png" path="/image/ui/over/" exported="true"/>
+    <image id="dlzcz" name="ChocoSticks.png" path="/image/ui/over/" exported="true"/>
+    <image id="dlzc10" name="Close.png" path="/image/ui/over/" exported="true"/>
+    <image id="dlzc11" name="PinkBasic.png" path="/image/ui/over/" exported="true"/>
+    <image id="dlzc12" name="GreyBasic.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc13" name="HeartButton.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc14" name="PinkBasic.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc15" name="PlayButton.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc16" name="String.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc17" name="SweetCream.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc18" name="SweetHome.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc19" name="WhiteBlackCream.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc1a" name="BreadBody.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc1b" name="BreadEyes.png" path="/image/ui/start/" exported="true"/>
+    <component id="dlzc1c" name="game.xml" path="/" exported="true"/>
+    <component id="dlzc1d" name="game_return.xml" path="/component/" exported="true"/>
+    <component id="dlzc1e" name="gameover.xml" path="/" exported="true"/>
+    <component id="dlzc1f" name="return_main.xml" path="/component/" exported="true"/>
+    <component id="dlzc1g" name="replay_btn.xml" path="/component/" exported="true"/>
+    <component id="dlzc1h" name="start.xml" path="/" exported="true"/>
+    <component id="a2191i" name="main_start.xml" path="/component/" exported="true"/>
+    <component id="a2191j" name="quit_btn.xml" path="/component/" exported="true"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>
