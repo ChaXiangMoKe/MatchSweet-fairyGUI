@@ -3,8 +3,8 @@
   <displayList>
     <image id="n0_a219" name="n0" src="dlzc18" fileName="image/ui/start/SweetHome.png" xy="0,0" size="1152,2048"/>
     <component id="n1_a219" name="start_btn" src="a2191i" fileName="component/main_start.xml" xy="312,907"/>
-    <component id="n2_a219" name="n2" src="a2191j" fileName="component/quit_btn.xml" xy="-160,1640" size="568,568" aspect="true"/>
-    <text id="n3_a219" name="n3" xy="60,1806" size="199,119" fontSize="96" color="#ffffff" strokeColor="#dfa6d2" strokeSize="2" text="退出"/>
+    <component id="n2_a219" name="quit_btn" src="a2191j" fileName="component/quit_btn.xml" xy="-160,1640" size="568,568" aspect="true"/>
+    <text id="n3_a219" name="n3" xy="60,1806" size="197,119" fontSize="96" color="#ffffff" strokeColor="#dfa6d2" strokeSize="2" text="退出"/>
     <image id="n5_a219" name="n5" src="dlzc16" fileName="image/ui/start/String.png" xy="112,298"/>
     <image id="n4_a219" name="n4" src="dlzc17" fileName="image/ui/start/SweetCream.png" xy="-6,4" size="1152,817"/>
     <image id="n8_a219" name="n8" src="dlzc3" fileName="image/effects/RadialShine.png" xy="-164,548"/>

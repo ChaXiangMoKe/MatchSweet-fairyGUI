@@ -39,16 +39,16 @@
     <image id="dlzcz" name="ChocoSticks.png" path="/image/ui/over/" exported="true"/>
     <image id="dlzc10" name="Close.png" path="/image/ui/over/" exported="true"/>
     <image id="dlzc11" name="PinkBasic.png" path="/image/ui/over/" exported="true"/>
-    <image id="dlzc12" name="GreyBasic.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc13" name="HeartButton.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc14" name="PinkBasic.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc15" name="PlayButton.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc16" name="String.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc17" name="SweetCream.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc18" name="SweetHome.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc19" name="WhiteBlackCream.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc1a" name="BreadBody.png" path="/image/ui/start/" exported="true"/>
-    <image id="dlzc1b" name="BreadEyes.png" path="/image/ui/start/" exported="true"/>
+    <image id="dlzc12" name="GreyBasic.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc13" name="HeartButton.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc14" name="PinkBasic.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc15" name="PlayButton.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc16" name="String.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc17" name="SweetCream.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc18" name="SweetHome.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc19" name="WhiteBlackCream.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc1a" name="BreadBody.png" path="/image/ui/start/" exported="true" atlas="1"/>
+    <image id="dlzc1b" name="BreadEyes.png" path="/image/ui/start/" exported="true" atlas="1"/>
     <component id="dlzc1c" name="game.xml" path="/" exported="true"/>
     <component id="dlzc1d" name="game_return.xml" path="/component/" exported="true"/>
     <component id="dlzc1e" name="gameover.xml" path="/" exported="true"/>
@@ -58,5 +58,17 @@
     <component id="a2191i" name="main_start.xml" path="/component/" exported="true"/>
     <component id="a2191j" name="quit_btn.xml" path="/component/" exported="true"/>
   </resources>
-  <publish name=""/>
+  <publish name="main" path="..\client\MatchSweet-fairyGUI\Assets\Build\UI\main" maxAtlasSize="4096">
+    <atlas compression="true" index="0"/>
+    <atlas compression="true" index="1"/>
+    <atlas compression="true" index="2"/>
+    <atlas compression="true" index="3"/>
+    <atlas compression="true" index="4"/>
+    <atlas compression="true" index="5"/>
+    <atlas compression="true" index="6"/>
+    <atlas compression="true" index="7"/>
+    <atlas compression="true" index="8"/>
+    <atlas compression="true" index="9"/>
+    <atlas compression="true" index="10"/>
+  </publish>
 </packageDescription>
