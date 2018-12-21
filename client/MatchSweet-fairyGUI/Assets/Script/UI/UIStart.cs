@@ -52,7 +52,7 @@ namespace Game.UI
 
         private void OnQuitClick()
         {
-            Debug.Log("OnQuitClick");
+            
         }
     }
 }
