@@ -58,7 +58,7 @@
     <component id="a2191i" name="main_start.xml" path="/component/" exported="true"/>
     <component id="a2191j" name="quit_btn.xml" path="/component/" exported="true"/>
   </resources>
-  <publish name="main" path="..\client\MatchSweet-fairyGUI\Assets\Build\UI\main" maxAtlasSize="4096">
+  <publish name="main" path="..\client\MatchSweet-fairyGUI\Assets\Resources\UI\main" maxAtlasSize="4096">
     <atlas compression="true" index="0"/>
     <atlas compression="true" index="1"/>
     <atlas compression="true" index="2"/>

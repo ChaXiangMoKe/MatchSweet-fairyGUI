@@ -5,15 +5,11 @@ using Game.UI;
 
 public class  GameManager: MonoBehaviour {
 
-    public UIStart main;
+    public UIStart start;
 	// Use this for initialization
 	void Start () {
-        main = new UIStart();
-        main.Show();
+        start = new UIStart();
+        start.Show();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
