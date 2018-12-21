@@ -37,8 +37,8 @@ namespace Game.UI
         /// </summary>
         private void InitUI()
         {
-            return_main_btn.onClick.Set(OnStartClick);
-            replay_btn.onClick.Set(OnQuitClick);
+            return_main_btn.onClick.Set(OnReturnMainClick);
+            replay_btn.onClick.Set(OnRepalyClick);
         }
 
         private void OnReturnMainClick()
