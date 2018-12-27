@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI;
+using Game.Data;
 
 namespace Game.UI
 {
@@ -40,6 +41,18 @@ namespace Game.UI
         private void InitUI()
         {
             return_button.onClick.Set(OnReturnClick);
+            Debug.Log(" xColumn " + GameManager.Instance.xColumn);
+            for(int x = 0; x < GameManager.Instance.xColumn; x++)
+            {
+                for(int y = 0; y < GameManager.Instance.yRow; y++)
+                {
+                    GComponent gSweet = UIPackage.CreateObject("main", "sweet").asCom;
+                    contentPane.AddChild(gSweet);
+                    GameSweet sweet = new GameSweet(gSweet);
+                    GameManager.Instance.SweetList[x, y] = sweet;
+                    Debug.Log("x :" + x + " y :" + y);
+                }
+            }
         }
 
         private void OnReturnClick()

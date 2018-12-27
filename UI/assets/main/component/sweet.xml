@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="100,100">
+  <controller name="SweetsType" pages="0,EMPTY,1,NORMAL,2,BARRIER,3,ROW_CLEAR,4,COLUMN_CLEAR,5,RAINBOWCANDY" selected="5">
+    <action type="play_transition" fromPage="" toPage="3" transition="ROW_CLEAR"/>
+    <action type="play_transition" fromPage="" toPage="4" transition="COLUMN_CLEAR"/>
+    <action type="play_transition" fromPage="" toPage="5" transition="RAINBOWCANDY"/>
+  </controller>
+  <displayList>
+    <loader id="n0_po1o" name="icon" xy="0,0" size="100,100" locked="true" hideByEditor="true" url="ui://z8rzzhsedlzcb" fill="scale">
+      <gearDisplay controller="SweetsType" pages="0,1,3,4"/>
+    </loader>
+    <image id="n1_hsvo" name="n1" src="dlzc9" fileName="image/sweets/Biscuit.png" xy="0,1" size="100,96" aspect="true">
+      <gearDisplay controller="SweetsType" pages="2"/>
+    </image>
+    <image id="n2_hsvo" name="n2" src="dlzca" fileName="image/sweets/BiscuitSpiral.png" xy="0,1" size="100,96" aspect="true">
+      <gearDisplay controller="SweetsType" pages="2"/>
+    </image>
+    <image id="n4_hsvo" name="n4" src="dlzc4" fileName="image/effects/RingBig.png" xy="0,0" size="100,100" aspect="true">
+      <gearDisplay controller="SweetsType" pages="5"/>
+    </image>
+    <image id="n3_hsvo" name="n3" src="dlzcc" fileName="image/sweets/Colors.png" xy="2,1" pivot="0.5,0.5" size="95,96" aspect="true">
+      <gearDisplay controller="SweetsType" pages="5"/>
+    </image>
+  </displayList>
+  <transition name="ROW_CLEAR">
+    <item time="0" type="XY" target="n0_po1o" tween="true" startValue="-5,0" endValue="5,0" duration="6" ease="Linear" repeat="-1" yoyo="true"/>
+  </transition>
+  <transition name="COLUMN_CLEAR">
+    <item time="0" type="XY" target="n0_po1o" tween="true" startValue="0,-5" endValue="0,5" duration="6" ease="Linear" repeat="-1" yoyo="true"/>
+  </transition>
+  <transition name="RAINBOWCANDY" autoPlayRepeat="-1">
+    <item time="0" type="Rotation" target="n3_hsvo" tween="true" startValue="0" endValue="360" duration="18" ease="Linear" repeat="-1"/>
+  </transition>
+</component>
