@@ -60,8 +60,9 @@ namespace Game.Data
 
         private FairyGUI.Controller _SweetCon;
         private GLoader _loader;
-        public GameSweet (GComponent sweet)
+        public GameSweet (GComponent sweet,SweetsType type)
         {
+            _type = type;
             _sweet = sweet;
             _SweetCon = _sweet.GetController("SweetsType");
             _loader = _sweet.GetChild("icon").asLoader;

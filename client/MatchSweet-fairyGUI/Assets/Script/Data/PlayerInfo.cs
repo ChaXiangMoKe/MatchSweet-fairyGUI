@@ -54,6 +54,15 @@ namespace Game.Data
             set { _SweetColorDict = value; }
         }
 
+        /// <summary>
+        /// 游戏行数
+        /// </summary>
+        public static int xColumn = 10;
+        /// <summary>
+        /// 游戏列数
+        /// </summary>
+        public static int yRow = 10;
+
         public static void SetDictionary()
         {
             _SweetColorDict[ColorType.YELLOW] = "Yellow";

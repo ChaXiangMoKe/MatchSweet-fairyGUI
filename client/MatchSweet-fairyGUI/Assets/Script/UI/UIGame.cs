@@ -11,6 +11,7 @@ namespace Game.UI
         private GTextField time_text;
         private GTextField scote_text;
         private GButton return_button;
+        private GComponent parents_com;
         protected override void OnShown()
         {
             UIPackage.AddPackage("UI/main/main");
@@ -33,6 +34,7 @@ namespace Game.UI
             time_text = contentPane.GetChild("time_text").asTextField;
             scote_text = contentPane.GetChild("scote_text").asTextField;
             return_button = contentPane.GetChild("return_btn").asButton;
+            parents_com = contentPane.GetChild("parents").asCom;
         }
 
         /// <summary>
@@ -41,16 +43,15 @@ namespace Game.UI
         private void InitUI()
         {
             return_button.onClick.Set(OnReturnClick);
-            Debug.Log(" xColumn " + GameManager.Instance.xColumn);
-            for(int x = 0; x < GameManager.Instance.xColumn; x++)
+            GameManager.Instance.SweetList = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
+            for (int x = 0; x < PlayerInfo.xColumn; x++)
             {
-                for(int y = 0; y < GameManager.Instance.yRow; y++)
+                for(int y = 0; y < PlayerInfo.yRow; y++)
                 {
-                    GComponent gSweet = UIPackage.CreateObject("main", "sweet").asCom;
-                    contentPane.AddChild(gSweet);
-                    GameSweet sweet = new GameSweet(gSweet);
-                    GameManager.Instance.SweetList[x, y] = sweet;
-                    Debug.Log("x :" + x + " y :" + y);
+                    GComponent com = UIPackage.CreateObject("main", "sweet").asCom;
+                    parents_com.AddChild(com);
+                    GameSweet gameSweet = new GameSweet(com,SweetsType.EMPTY);
+                    GameManager.Instance.SweetList[x, y] = gameSweet;
                 }
             }
         }
@@ -61,5 +62,7 @@ namespace Game.UI
             start.Show();
             this.Dispose();
         }
+
+       
     }
 }

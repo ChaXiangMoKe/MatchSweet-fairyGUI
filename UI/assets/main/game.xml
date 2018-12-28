@@ -5,6 +5,7 @@
     <image id="n1_dlzc" name="n1" src="dlzcq" fileName="image/ui/game/BottomBar.png" xy="-144,1828"/>
     <image id="n2_dlzc" name="n2" src="dlzcx" fileName="image/ui/game/TopBar.png" xy="-144,-54"/>
     <image id="n3_dlzc" name="n3" src="dlzco" fileName="image/ui/game/TopInfoBox.png" xy="288,-14" size="575,129"/>
+    <component id="n11_nkmy" name="parents" src="nkmy1l" fileName="component/Component_parents.xml" xy="76,524"/>
     <text id="n4_dlzc" name="scote_text" xy="528,23" size="101,52" fontSize="40" color="#c7d02f" align="center" vAlign="middle" bold="true" text="2000"/>
     <image id="n8_dlzc" name="n8" src="dlzcv" fileName="image/ui/game/SpiralShadow.png" xy="-20,-17" size="380,365" group="n9_dlzc" aspect="true"/>
     <image id="n5_dlzc" name="n5" src="dlzcr" fileName="image/ui/game/ChocoBackground.png" xy="9,4" size="322,323" group="n9_dlzc" aspect="true"/>
