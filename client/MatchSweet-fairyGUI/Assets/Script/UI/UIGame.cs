@@ -43,15 +43,15 @@ namespace Game.UI
         private void InitUI()
         {
             return_button.onClick.Set(OnReturnClick);
-            GameManager.Instance.SweetList = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
+            GameManager.Instance._sweets = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
             for (int x = 0; x < PlayerInfo.xColumn; x++)
             {
                 for(int y = 0; y < PlayerInfo.yRow; y++)
                 {
                     GComponent com = UIPackage.CreateObject("main", "sweet").asCom;
                     parents_com.AddChild(com);
-                    GameSweet gameSweet = new GameSweet(com,SweetsType.EMPTY);
-                    GameManager.Instance.SweetList[x, y] = gameSweet;
+                    GameSweet gameSweet = new GameSweet(com);
+                    GameManager.Instance._sweets[x, y] = gameSweet;
                 }
             }
         }

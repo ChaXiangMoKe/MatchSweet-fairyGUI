@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.UI;
 using Game.Data;
 using FairyGUI;
-using DG.Tweening;
+
 using System;
 
 namespace Game
@@ -24,7 +24,7 @@ namespace Game
         // 甜品字典
         public Dictionary<SweetsType, string> sweetPrefabDict;
 
-        public GameSweet[,] SweetList;
+        public GameSweet[,] _sweets;
         public UIStart start;
 
         private static GameManager instance;
@@ -32,7 +32,8 @@ namespace Game
 
         public static GameManager Instance
         {
-            get {
+            get
+            {
                 return instance;
             }
 
@@ -43,7 +44,7 @@ namespace Game
             instance = this;
             start = new UIStart();
             start.Show();
-            SweetList = new GameSweet[PlayerInfo.xColumn,PlayerInfo.yRow];
+            _sweets = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
         }
 
         /// <summary>
@@ -55,33 +56,31 @@ namespace Game
             // 判断本次填充是否完成
             bool isFiledNotFinished = false;
 
+            for (int y = 0; y < PlayerInfo.yRow; y++)
+            {
+                for (int x = 0; x < PlayerInfo.xColumn; x++)
+                {
+                    GameSweet sweet = _sweets[x, y];
+                    if (sweet.IsMove)
+                    {
+
+                        GameSweet sweetBelow = _sweets[x, y + 1];
+                        if(sweetBelow.Type == SweetsType.EMPTY)// 垂直填充
+                        {
+
+                        }
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
             return true;
         }
 
-        public void Move(GameSweet sweet, int x, int y, float time)
-        {
-            GComponent component = sweet.Sweet;
-            Vector2 newPos = new Vector2(sweet.X, sweet.Y);
-            sweet.X = x;
-            sweet.Y = y;
-            Vector2 oldPos = new Vector2(sweet.X, sweet.Y);
 
-            Tween _tween = DOTween.To(() => oldPos, pos =>
-            {
-                try
-                {
-                    component.xy = pos;
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError(e);
-                }
-            }, newPos, time).OnComplete(() =>
-            {
-
-            });
-
-        }
     }
 }
 
