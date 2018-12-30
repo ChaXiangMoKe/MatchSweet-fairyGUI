@@ -6,26 +6,26 @@ public interface IResetable
     void Reset();
 }
 
-public class Pool<T> : PoolBase where T :class ,IResetable ,new ()
-{ 
-    private Stack<T> m_objectSatck;
-    private Action<T> m_resetAction;
-    private  Action<T> m_onetimeInitAction;
+public class Pool
+{
+    private Stack<object> m_objectSatck;
+    private Action<object> m_resetAction;
+    private Action<object> m_onetimeInitAction;
 
-    public Pool(int initialBufferSize,Action<T> ResetAction = null, Action<T> OnetimeInitAction = null)
+    public Pool(int initialBufferSize, Action<object> ResetAction = null, Action<object> OnetimeInitAction = null)
     {
-        m_objectSatck = new Stack<T>(initialBufferSize);
+        m_objectSatck = new Stack<object>(initialBufferSize);
         m_resetAction = ResetAction;
         m_onetimeInitAction = OnetimeInitAction;
     }
-    public T New()
+    public T Create<T>() where T : class, IResetable, new()
     {
-        if(m_objectSatck.Count > 0)
+        if (m_objectSatck.Count > 0)
         {
-            T t = m_objectSatck.Pop();
+            T t = m_objectSatck.Pop() as T;
             t.Reset();
 
-            if(m_resetAction != null)
+            if (m_resetAction != null)
             {
                 m_resetAction(t);
             }
@@ -34,7 +34,7 @@ public class Pool<T> : PoolBase where T :class ,IResetable ,new ()
         else
         {
             T t = new T();
-            if(m_onetimeInitAction != null)
+            if (m_onetimeInitAction != null)
             {
                 m_onetimeInitAction(t);
             }
@@ -42,8 +42,8 @@ public class Pool<T> : PoolBase where T :class ,IResetable ,new ()
         }
     }
 
-    public void Store(T obj)
+    public void Store(object obj)
     {
         m_objectSatck.Push(obj);
-    }    
+    }
 }
