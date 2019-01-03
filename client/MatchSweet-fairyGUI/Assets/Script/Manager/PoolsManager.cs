@@ -10,24 +10,36 @@ public enum PoolType
 }
 public class PoolsManager  {
 
-    public Dictionary<PoolType,Pool> poolDict;
+    public static Dictionary<PoolType,Pool> poolDict;
     public void Init()
     {
         poolDict = new Dictionary<PoolType, Pool>();
         for(int i = 1;  i < (int)PoolType.Count;i++)
         {
-            poolDict[(PoolType)i] = new Pool(10);
+            poolDict[(PoolType)i] = new ResetPool(10);
         }
         
     }
 
-    public GameSweet GetSweetObj(PoolType type)
+    public static object GetObj(PoolType type)  
     {
-        return poolDict[type].Create<GameSweet>();
+        switch (type)
+        {
+            case PoolType.GameSweet:
+                return GetSweetObj();
+            default:
+                return null;
+        }  
+
     }
 
-    public void HideSweetObj<T>(PoolType type, T t) where T : class,IResetable,new()
+    public static GameSweet GetSweetObj()
     {
-        poolDict[type].Store(t);
+        return poolDict[PoolType.GameSweet].Create<GameSweet>();
+    }
+
+    public static void HideObj(PoolType type,object obj) 
+    {
+        poolDict[type].Store(obj);
     }
 }

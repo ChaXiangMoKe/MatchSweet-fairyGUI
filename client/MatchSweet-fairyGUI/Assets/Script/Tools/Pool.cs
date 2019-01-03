@@ -8,9 +8,9 @@ public interface IResetable
 
 public class Pool
 {
-    private Stack<object> m_objectSatck;
-    private Action<object> m_resetAction;
-    private Action<object> m_onetimeInitAction;
+    protected Stack<object> m_objectSatck;
+    protected Action<object> m_resetAction;
+    protected Action<object> m_onetimeInitAction;
 
     public Pool(int initialBufferSize, Action<object> ResetAction = null, Action<object> OnetimeInitAction = null)
     {
@@ -18,12 +18,11 @@ public class Pool
         m_resetAction = ResetAction;
         m_onetimeInitAction = OnetimeInitAction;
     }
-    public T Create<T>() where T : class, IResetable, new()
+    public T Create<T>() where T : class, new()
     {
         if (m_objectSatck.Count > 0)
         {
             T t = m_objectSatck.Pop() as T;
-            t.Reset();
 
             if (m_resetAction != null)
             {
@@ -47,3 +46,38 @@ public class Pool
         m_objectSatck.Push(obj);
     }
 }
+
+public class ResetPool : Pool
+{
+    public ResetPool(int initialBufferSize, Action<object> ResetAction = null, Action<object> OnetimeInitAction = null) : base(initialBufferSize, ResetAction,OnetimeInitAction)
+    {
+        m_objectSatck = new Stack<object>(initialBufferSize);
+        m_resetAction = ResetAction;
+        m_onetimeInitAction = OnetimeInitAction;
+    }
+
+    public new T Create<T>() where T : class, IResetable, new()
+    {
+        if (m_objectSatck.Count > 0)
+        {
+            T t = m_objectSatck.Pop() as T;
+            t.Reset();
+
+            if (m_resetAction != null)
+            {
+                m_resetAction(t);
+            }
+            return t;
+        }
+        else
+        {
+            T t = new T();
+            if (m_onetimeInitAction != null)
+            {
+                m_onetimeInitAction(t);
+            }
+            return t;
+        }
+    }
+}
+

@@ -12,6 +12,13 @@ namespace Game.UI
         private GTextField scote_text;
         private GButton return_button;
         private GComponent parents_com;
+        public GComboBox ParentsCom
+        {
+            get
+            {
+                return ParentsCom;
+            }
+        }
         protected override void OnShown()
         {
             UIPackage.AddPackage("UI/main/main");
@@ -50,7 +57,8 @@ namespace Game.UI
                 {
                     GComponent com = UIPackage.CreateObject("main", "sweet").asCom;
                     parents_com.AddChild(com);
-                    GameSweet gameSweet = new GameSweet(com);
+                    GameSweet gameSweet = PoolsManager.GetSweetObj();
+                    gameSweet.InitSweet(parents_com);
                     GameManager.Instance._sweets[x, y] = gameSweet;
                 }
             }

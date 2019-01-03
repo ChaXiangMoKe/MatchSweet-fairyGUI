@@ -45,8 +45,7 @@ namespace Game.UI
         private void OnStartClick()
         {
             this.Dispose();
-            UIGame game = new UIGame();
-            game.Show();
+            GameManager.Instance.GameUI.Show();
             
         }
 

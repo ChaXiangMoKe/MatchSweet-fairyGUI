@@ -65,16 +65,17 @@ namespace Game.Data
         private GLoader _loader;
         public GameSweet()
         {
-            _type = SweetsType.EMPTY;
+           
             _sweet = UIPackage.CreateObject("main", "sweet").asCom;
             _SweetCon = _sweet.GetController("SweetsType");
             _loader = _sweet.GetChild("icon").asLoader;
         }
 
-        public void InitSweet(SweetsType type,GComponent parents)
+        public void InitSweet(GComponent parents)
         {
+            _type = SweetsType.EMPTY;
             parents.AddChild(_sweet);
-            SetSweetsType(type);
+            SetSweetsType(_type);
         }
 
         /// <summary>
