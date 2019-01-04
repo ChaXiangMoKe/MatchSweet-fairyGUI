@@ -57,18 +57,20 @@ namespace Game.UI
                 {
                     GComponent com = UIPackage.CreateObject("main", "sweet").asCom;
                     parents_com.AddChild(com);
-                    GameSweet gameSweet = PoolsManager.GetSweetObj();
+                    GameSweet gameSweet = PoolsManager.Instance.GetSweetObj();
                     gameSweet.InitSweet(parents_com);
+                    gameSweet.SetXY(x, y);
                     GameManager.Instance._sweets[x, y] = gameSweet;
                 }
             }
+            GameManager.Instance.StartFill();
+            
         }
 
         private void OnReturnClick()
         {
-            UIStart start = new UIStart();
-            start.Show();
-            this.Dispose();
+            GameManager.Instance.StartUI.Show();
+            this.Hide();
         }
 
        

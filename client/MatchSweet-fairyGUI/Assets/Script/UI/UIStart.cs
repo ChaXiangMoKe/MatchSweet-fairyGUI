@@ -44,7 +44,7 @@ namespace Game.UI
 
         private void OnStartClick()
         {
-            this.Dispose();
+            this.Hide();
             GameManager.Instance.GameUI.Show();
             
         }

@@ -65,8 +65,31 @@ namespace Game
         void Start()
         {
             instance = this;
-            _StartUI.Show();
+            Init();
+        }
+
+        public void Init()
+        {
+            StartUI.Show();
             _sweets = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
+        }
+
+        public void StartFill()
+        {
+            StartCoroutine(AllFill());
+        }
+        public IEnumerator AllFill()
+        {
+            bool needRefill = true;
+            while (needRefill)
+            {
+                while (Fill())
+                {
+                    yield return new WaitForSeconds(fillTime);
+                }
+            }
+
+            needRefill = true;
         }
 
         /// <summary>
@@ -78,21 +101,20 @@ namespace Game
             // 判断本次填充是否完成
             bool isFiledNotFinished = false;
 
-            for (int y = 0; y < PlayerInfo.yRow; y++)
+            for (int y = PlayerInfo.yRow - 2; y >= 0; y--)
             {
                 for (int x = 0; x < PlayerInfo.xColumn; x++)
                 {
                     GameSweet sweet = _sweets[x, y];
                     if (sweet.IsMove)
                     {
-
-                        GameSweet sweetBelow = _sweets[x, y - 1];
+                        GameSweet sweetBelow = _sweets[x, y + 1];
                         if (sweetBelow.Type == SweetsType.EMPTY)// 垂直填充
                         {
-                            PoolsManager.HideObj(PoolType.GameSweet, sweetBelow);
+                            PoolsManager.Instance.HideObj(PoolType.GameSweet, sweetBelow);
                             sweet.Move(x, y + 1, fillTime);
                             _sweets[x, y + 1] = sweet;
-                            _sweets[x, y] = PoolsManager.GetSweetObj();
+                            _sweets[x, y] = PoolsManager.Instance.GetSweetObj();
                             _sweets[x, y].InitSweet(GameUI.ParentsCom);
                             isFiledNotFinished = true;
                         }
@@ -129,10 +151,10 @@ namespace Game
 
                                                 if (!canfill)
                                                 {
-                                                    PoolsManager.HideObj(PoolType.GameSweet, sweetBelow);
+                                                    PoolsManager.Instance.HideObj(PoolType.GameSweet, sweetBelow);
                                                     sweet.Move(downX, y + 1, fillTime);
                                                     _sweets[downX, y + 1] = sweet;
-                                                    _sweets[downX, y] = PoolsManager.GetSweetObj();
+                                                    _sweets[downX, y] = PoolsManager.Instance.GetSweetObj();
                                                     _sweets[downX, y].InitSweet(GameUI.ParentsCom);
                                                     isFiledNotFinished = true;
                                                 }
@@ -146,8 +168,19 @@ namespace Game
                 }
 
             }
-
-            return true;
+            //最上排的特殊情况
+            for (int x = 0; x < PlayerInfo.xColumn; x++)
+            {
+                GameSweet sweet = _sweets[x, 0];
+                if (sweet.Type == SweetsType.EMPTY)
+                {
+                    sweet.SetSweetsType(SweetsType.NORMAL);
+                    sweet.SetXY(x, -1);
+                    sweet.Move(x, 0, fillTime);
+                    isFiledNotFinished = true;
+                }
+            }
+            return isFiledNotFinished;
         }
     }
 

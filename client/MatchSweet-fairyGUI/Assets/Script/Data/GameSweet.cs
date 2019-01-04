@@ -58,14 +58,12 @@ namespace Game.Data
         public bool IsMove
         {
             get { return _IsMove; }
-            set { _IsMove = value; }
         }
 
         private FairyGUI.Controller _SweetCon;
         private GLoader _loader;
         public GameSweet()
         {
-           
             _sweet = UIPackage.CreateObject("main", "sweet").asCom;
             _SweetCon = _sweet.GetController("SweetsType");
             _loader = _sweet.GetChild("icon").asLoader;
@@ -83,31 +81,36 @@ namespace Game.Data
         /// </summary>
         /// <param name="x">x坐标</param>
         /// <param name="y">y坐标</param>
-        public void SetXY(int x,int y)
+        public void SetXY(int x, int y)
         {
             X = x;
             Y = y;
-            _sweet.xy = new Vector2(x * _sweet.width, y * _sweet.height);
+            _sweet.xy = ChangePostion(x, y);
         }
 
         public void SetColor(ColorType color)
         {
-            _loader.url = PlayerInfo.SweetColorDict[color];
+            _loader.url = PlayerInfo.Instance.SweetColorDict[color];
         }
         public void SetSweetsType(SweetsType type)
         {
             _SweetCon.SetSelectedIndex((int)type);
-            if (type == SweetsType.NORMAL)
+            switch (type)
             {
-                _loader.url = PlayerInfo.GetSweetColor();
+                case SweetsType.EMPTY:
+                    _IsMove = true;
+                    break;
+                case SweetsType.NORMAL:
+                    _IsMove = true;
+                    _loader.url = PlayerInfo.Instance.GetSweetColor();
+                    break;
             }
         }
 
-
-        public void Move(int newX,int newY,float time)
+        public void Move(int newX, int newY, float time)
         {
-            
-            Vector2 oldPos  = ChangePostion(X,Y);
+
+            Vector2 oldPos = ChangePostion(X, Y);
             Vector2 newPos = ChangePostion(newX, newY);
 
             Tween _tween = DOTween.To(() => oldPos, pos =>
@@ -127,7 +130,7 @@ namespace Game.Data
             });
         }
 
-        private Vector2 ChangePostion(int x ,int y)
+        private Vector2 ChangePostion(int x, int y)
         {
             return new Vector2(x * _sweet.width, y * _sweet.height);
         }

@@ -45,10 +45,10 @@ namespace Game.Data
         ANY,
         COUNT
     }
-    public static class PlayerInfo
+    public  class PlayerInfo
     {
-        private static Dictionary<ColorType, string> _SweetColorDict;
-        public static Dictionary<ColorType, string> SweetColorDict
+        private  Dictionary<ColorType, string> _SweetColorDict;
+        public  Dictionary<ColorType, string> SweetColorDict
         {
             get { return _SweetColorDict; }
             set { _SweetColorDict = value; }
@@ -63,8 +63,23 @@ namespace Game.Data
         /// </summary>
         public static int yRow = 10;
 
-        public static void SetDictionary()
+        public static PlayerInfo instance;
+        public static PlayerInfo Instance
         {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new PlayerInfo();
+                    instance.SetDictionary();
+                }
+                return instance;
+            }
+        }
+
+        public  void SetDictionary()
+        {
+            _SweetColorDict = new Dictionary<ColorType, string>();
             _SweetColorDict[ColorType.YELLOW] = "Yellow";
             _SweetColorDict[ColorType.PURPLE] = "Purple";
             _SweetColorDict[ColorType.RED] = "Red";
@@ -75,7 +90,7 @@ namespace Game.Data
             _SweetColorDict[ColorType.COUNT] = "";
         }
 
-        public static string GetSweetColor()
+        public string GetSweetColor()
         {
             return _SweetColorDict[(ColorType)(Random.Range(0, (int)ColorType.COUNT))];
         }

@@ -8,20 +8,33 @@ public enum PoolType
     GameSweet,
     Count,
 }
-public class PoolsManager  {
+public class PoolsManager
+{
 
-    public static Dictionary<PoolType,Pool> poolDict;
+    public Dictionary<PoolType, Pool> poolDict;
+
+    private PoolsManager() { }
+    private static PoolsManager instance;
+    public static PoolsManager Instance
+    {
+        get
+        {
+            if(instance== null)
+            {
+                instance = new PoolsManager();
+                instance.Init();
+            }
+            return instance;
+        }
+    }
+
     public void Init()
     {
         poolDict = new Dictionary<PoolType, Pool>();
-        for(int i = 1;  i < (int)PoolType.Count;i++)
-        {
-            poolDict[(PoolType)i] = new ResetPool(10);
-        }
-        
+        poolDict[PoolType.GameSweet] = new ResetPool(10);
     }
 
-    public static object GetObj(PoolType type)  
+    public object GetObj(PoolType type)
     {
         switch (type)
         {
@@ -29,16 +42,16 @@ public class PoolsManager  {
                 return GetSweetObj();
             default:
                 return null;
-        }  
+        }
 
     }
 
-    public static GameSweet GetSweetObj()
+    public GameSweet GetSweetObj()
     {
         return poolDict[PoolType.GameSweet].Create<GameSweet>();
     }
 
-    public static void HideObj(PoolType type,object obj) 
+    public void HideObj(PoolType type, object obj)
     {
         poolDict[type].Store(obj);
     }
