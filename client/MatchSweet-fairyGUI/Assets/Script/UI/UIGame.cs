@@ -16,9 +16,11 @@ namespace Game.UI
         {
             get
             {
+                Debug.Log("_GameUI " + ParentsCom);
                 return ParentsCom;
             }
         }
+
         protected override void OnShown()
         {
             UIPackage.AddPackage("UI/main/main");
@@ -56,7 +58,6 @@ namespace Game.UI
                 for(int y = 0; y < PlayerInfo.yRow; y++)
                 {
                     GComponent com = UIPackage.CreateObject("main", "sweet").asCom;
-                    parents_com.AddChild(com);
                     GameSweet gameSweet = PoolsManager.Instance.GetSweetObj();
                     gameSweet.InitSweet(parents_com);
                     gameSweet.SetXY(x, y);

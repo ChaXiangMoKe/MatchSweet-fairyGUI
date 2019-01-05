@@ -45,7 +45,7 @@ namespace Game
                 if (_GameUI == null)
                 {
                     _GameUI = new UIGame();
-                }
+                }               
                 return _GameUI;
             }
         }
