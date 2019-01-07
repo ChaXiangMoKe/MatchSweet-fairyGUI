@@ -31,7 +31,7 @@ public class PoolsManager
     public void Init()
     {
         poolDict = new Dictionary<PoolType, Pool>();
-        poolDict[PoolType.GameSweet] = new ResetPool(10);
+        poolDict[PoolType.GameSweet] = new ResetPool<GameSweet>(10);
     }
 
     public object GetObj(PoolType type)

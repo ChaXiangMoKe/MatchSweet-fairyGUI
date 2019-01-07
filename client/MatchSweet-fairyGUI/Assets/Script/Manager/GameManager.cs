@@ -24,30 +24,24 @@ namespace Game
         // 甜品字典
         public Dictionary<SweetsType, string> sweetPrefabDict;
 
-        public GameSweet[,] _sweets;
+        private GameSweet[,] _sweets;
+        public GameSweet[,] Sweets
+        {
+            get { return _sweets; }
+            set { _sweets = value; }
+        }
         private UIStart _StartUI;
         public UIStart StartUI
         {
-            get
-            {
-                if (_StartUI == null)
-                {
-                    _StartUI = new UIStart();
-                }
-                return _StartUI;
-            }
+            get{ return _StartUI;}
+            set { _StartUI = value; }
         }
         private UIGame _GameUI;
         public UIGame GameUI
         {
-            get
-            {
-                if (_GameUI == null)
-                {
-                    _GameUI = new UIGame();
-                }               
-                return _GameUI;
-            }
+            get { return _GameUI; }
+            set { _GameUI = value; }
+
         }
 
         private static GameManager instance;
@@ -70,10 +64,21 @@ namespace Game
 
         public void Init()
         {
-            StartUI.Show();
+            StartUIShow();
             _sweets = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
         }
 
+        public void StartUIShow()
+        {
+            _StartUI = new UIStart();
+            _StartUI.Show();
+        }
+
+        public void GameUIShow()
+        {
+            _GameUI = new UIGame();
+            _GameUI.Show();
+        }
         public void StartFill()
         {
             StartCoroutine(AllFill());
@@ -111,11 +116,10 @@ namespace Game
                         GameSweet sweetBelow = _sweets[x, y + 1];
                         if (sweetBelow.Type == SweetsType.EMPTY)// 垂直填充
                         {
-                            PoolsManager.Instance.HideObj(PoolType.GameSweet, sweetBelow);
+                            sweetBelow.Hide();
                             sweet.Move(x, y + 1, fillTime);
                             _sweets[x, y + 1] = sweet;
                             _sweets[x, y] = PoolsManager.Instance.GetSweetObj();
-                            _sweets[x, y].InitSweet(GameUI.ParentsCom);
                             isFiledNotFinished = true;
                         }
                         else //斜向填充
@@ -151,11 +155,10 @@ namespace Game
 
                                                 if (!canfill)
                                                 {
-                                                    PoolsManager.Instance.HideObj(PoolType.GameSweet, sweetBelow);
+                                                    sweetBelow.Hide();
                                                     sweet.Move(downX, y + 1, fillTime);
                                                     _sweets[downX, y + 1] = sweet;
                                                     _sweets[downX, y] = PoolsManager.Instance.GetSweetObj();
-                                                    _sweets[downX, y].InitSweet(GameUI.ParentsCom);
                                                     isFiledNotFinished = true;
                                                 }
                                             }

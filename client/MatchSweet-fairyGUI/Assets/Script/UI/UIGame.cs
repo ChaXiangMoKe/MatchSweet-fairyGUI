@@ -16,7 +16,6 @@ namespace Game.UI
         {
             get
             {
-                Debug.Log("_GameUI " + ParentsCom);
                 return ParentsCom;
             }
         }
@@ -32,7 +31,13 @@ namespace Game.UI
 
         protected override void OnHide()
         {
-           
+            for (int x = 0; x < PlayerInfo.xColumn; x++)
+            {
+                for (int y = 0; y < PlayerInfo.yRow; y++)
+                {
+                    GameManager.Instance.Sweets[x, y].Hide();
+                }
+            }
         }
 
         /// <summary>
@@ -52,16 +57,15 @@ namespace Game.UI
         private void InitUI()
         {
             return_button.onClick.Set(OnReturnClick);
-            GameManager.Instance._sweets = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
+            GameManager.Instance.Sweets = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
             for (int x = 0; x < PlayerInfo.xColumn; x++)
             {
                 for(int y = 0; y < PlayerInfo.yRow; y++)
                 {
-                    GComponent com = UIPackage.CreateObject("main", "sweet").asCom;
                     GameSweet gameSweet = PoolsManager.Instance.GetSweetObj();
                     gameSweet.InitSweet(parents_com);
                     gameSweet.SetXY(x, y);
-                    GameManager.Instance._sweets[x, y] = gameSweet;
+                    GameManager.Instance.Sweets[x, y] = gameSweet;
                 }
             }
             GameManager.Instance.StartFill();
@@ -70,10 +74,9 @@ namespace Game.UI
 
         private void OnReturnClick()
         {
-            GameManager.Instance.StartUI.Show();
-            this.Hide();
+            GameManager.Instance.StartUIShow();
+            this.Dispose();
         }
-
        
     }
 }

@@ -6,20 +6,28 @@ public interface IResetable
     void Reset();
 }
 
-public class Pool
+public abstract class Pool
 {
     protected Stack<object> m_objectSatck;
     protected Action<object> m_resetAction;
     protected Action<object> m_onetimeInitAction;
 
-    public Pool(int initialBufferSize, Action<object> ResetAction = null, Action<object> OnetimeInitAction = null)
+    public abstract T Create<T>() where T : class,new();
+
+    public abstract void Store(object obj);
+}
+
+public class PoolNormal:Pool
+{
+
+    public PoolNormal(int initialBufferSize, Action<object> ResetAction = null, Action<object> OnetimeInitAction = null)
     {
         m_objectSatck = new Stack<object>(initialBufferSize);
         m_resetAction = ResetAction;
         m_onetimeInitAction = OnetimeInitAction;
     }
-    public T Create<T>() where T : class, new()
-    {
+    public override T Create<T>() 
+    { 
         if (m_objectSatck.Count > 0)
         {
             T t = m_objectSatck.Pop() as T;
@@ -41,43 +49,50 @@ public class Pool
         }
     }
 
-    public void Store(object obj)
+    public override void Store(object obj)
     {
         m_objectSatck.Push(obj);
     }
 }
 
-public class ResetPool : Pool
+public class ResetPool<R> : Pool where R :class,IResetable,new() 
 {
-    public ResetPool(int initialBufferSize, Action<object> ResetAction = null, Action<object> OnetimeInitAction = null) : base(initialBufferSize, ResetAction,OnetimeInitAction)
+    public ResetPool(int initialBufferSize, Action<object> ResetAction = null, Action<object> OnetimeInitAction = null)
     {
         m_objectSatck = new Stack<object>(initialBufferSize);
         m_resetAction = ResetAction;
         m_onetimeInitAction = OnetimeInitAction;
     }
 
-    public new T Create<T>() where T : class, IResetable, new()
+    public override T Create<T>()
     {
         if (m_objectSatck.Count > 0)
         {
-            T t = m_objectSatck.Pop() as T;
-            t.Reset();
+            R r = m_objectSatck.Pop() as R ;
+            r.Reset();
 
             if (m_resetAction != null)
             {
-                m_resetAction(t);
+                m_resetAction(r);
             }
-            return t;
+            return r as T;
         }
         else
         {
-            T t = new T();
+            R r = new R();
             if (m_onetimeInitAction != null)
             {
-                m_onetimeInitAction(t);
+                m_onetimeInitAction(r);
             }
-            return t;
+            return r as T;
         }
     }
+
+    public override void Store(object obj)
+    {
+        m_objectSatck.Push(obj);
+    }
 }
+
+
 

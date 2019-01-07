@@ -62,15 +62,19 @@ namespace Game.Data
 
         private FairyGUI.Controller _SweetCon;
         private GLoader _loader;
+        private GComponent _parents;
         public GameSweet()
         {
             _sweet = UIPackage.CreateObject("main", "sweet").asCom;
             _SweetCon = _sweet.GetController("SweetsType");
             _loader = _sweet.GetChild("icon").asLoader;
+            _sweet.visible = true;
         }
 
         public void InitSweet(GComponent parents)
         {
+            _parents = parents;
+            _sweet.visible = true;
             _type = SweetsType.EMPTY;
             parents.AddChild(_sweet);
             SetSweetsType(_type);
@@ -135,13 +139,16 @@ namespace Game.Data
             return new Vector2(x * _sweet.width, y * _sweet.height);
         }
 
-        private void Hide()
+        public void Hide()
         {
-            _sweet.Dispose();
+            _sweet.visible = false;
+            PoolsManager.Instance.HideObj(PoolType.GameSweet,this);
         }
 
         public void Reset()
         {
+            _sweet.visible = true;
+            _parents.AddChild(_sweet);
             SetSweetsType(SweetsType.EMPTY);
             x = 0;
             y = 0;
