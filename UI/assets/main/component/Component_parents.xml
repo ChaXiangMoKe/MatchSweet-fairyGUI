@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1000,1000"/>
+<component size="1000,1000" overflow="hidden">
+  <displayList/>
+</component>

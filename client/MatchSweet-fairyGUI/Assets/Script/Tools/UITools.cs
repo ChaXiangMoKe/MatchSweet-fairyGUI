@@ -7,4 +7,5 @@ using Game.Data;
 using System;
 
 public class UITools {
+
 }

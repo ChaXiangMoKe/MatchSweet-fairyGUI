@@ -54,20 +54,47 @@ namespace Game.Data
             set { _sweet = value; }
         }
 
+        private ColorType _Color;
+        public ColorType Color
+        {
+            get { return _Color; }
+            set
+            {
+                if (_type == SweetsType.NORMAL)
+                {
+                    _Color = value;
+                    _loader.url =  PlayerInfo.Instance.GetSweetColorUrl(_Color);
+                }
+                else
+                {
+                    _Color = ColorType.COUNT;
+                }
+            }
+        }
+
         private bool _IsMove;
         public bool IsMove
         {
             get { return _IsMove; }
         }
 
+        private bool _IsClear;
+        public bool IsClear
+        {
+            get { return _IsClear; }
+        }
+
         private FairyGUI.Controller _SweetCon;
         private GLoader _loader;
         private GComponent _parents;
+        private Transition _normalClearTra;
+
         public GameSweet()
         {
             _sweet = UIPackage.CreateObject("main", "sweet").asCom;
             _SweetCon = _sweet.GetController("SweetsType");
             _loader = _sweet.GetChild("icon").asLoader;
+            _normalClearTra = _sweet.GetTransition("normal_clear");
             _sweet.visible = true;
         }
 
@@ -78,6 +105,7 @@ namespace Game.Data
             _type = SweetsType.EMPTY;
             parents.AddChild(_sweet);
             SetSweetsType(_type);
+
         }
 
         /// <summary>
@@ -92,31 +120,45 @@ namespace Game.Data
             _sweet.xy = ChangePostion(x, y);
         }
 
-        public void SetColor(ColorType color)
-        {
-            _loader.url = PlayerInfo.Instance.SweetColorDict[color];
-        }
         public void SetSweetsType(SweetsType type)
         {
+            _type = type;
             _SweetCon.SetSelectedIndex((int)type);
+            _Color = ColorType.COUNT;
             switch (type)
             {
                 case SweetsType.EMPTY:
-                    _IsMove = true;
+                    {
+                        _IsMove = true;
+                        _IsClear = false;
+
+                    }
                     break;
                 case SweetsType.NORMAL:
-                    _IsMove = true;
-                    _loader.url = PlayerInfo.Instance.GetSweetColor();
+                    {
+                        _IsMove = true;
+                        _IsClear = true;
+
+                        Color = PlayerInfo.Instance.GetSweetColor();
+                    }
+                    break;
+                case SweetsType.ROW_CLEAR:
+                    break;
+                case SweetsType.COLUMN_CLEAR:
+                    break;
+                case SweetsType.EXPLOSION:
+                    break;
+                case SweetsType.RAINBOWCANDY:
                     break;
             }
         }
 
         public void Move(int newX, int newY, float time)
         {
-
             Vector2 oldPos = ChangePostion(X, Y);
             Vector2 newPos = ChangePostion(newX, newY);
-
+            X = newX;
+            Y = newY;
             Tween _tween = DOTween.To(() => oldPos, pos =>
             {
                 try
@@ -129,9 +171,26 @@ namespace Game.Data
                 }
             }, newPos, time).OnComplete(() =>
             {
-                X = x;
-                Y = y;
+
             });
+
+        }
+
+        /// <summary>
+        ///  是否可消除
+        /// </summary>
+        /// <returns></returns>
+        public bool IsMatch()
+        {
+            if (_type == SweetsType.NORMAL)
+            {
+                if (_Color == ColorType.COUNT)
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
         }
 
         private Vector2 ChangePostion(int x, int y)
@@ -141,10 +200,28 @@ namespace Game.Data
 
         public void Hide()
         {
+            _loader.alpha = 1;
             _sweet.visible = false;
-            PoolsManager.Instance.HideObj(PoolType.GameSweet,this);
+            PoolsManager.Instance.HideObj(PoolType.GameSweet, this);
+            _parents.RemoveChild(_sweet);
         }
 
+        public void Clear()
+        {
+           if(_IsClear)
+            {
+                switch (_type)
+                {
+                    case SweetsType.NORMAL:
+                        {
+                            _normalClearTra.Play();
+                            _type = SweetsType.EMPTY;
+                        }
+                        break;
+                }
+
+            }
+        }
         public void Reset()
         {
             _sweet.visible = true;
@@ -152,6 +229,16 @@ namespace Game.Data
             SetSweetsType(SweetsType.EMPTY);
             x = 0;
             y = 0;
+        }
+
+        public void OnStart()
+        {
+
+        }
+
+        public void OnEnd()
+        {
+
         }
     }
 }

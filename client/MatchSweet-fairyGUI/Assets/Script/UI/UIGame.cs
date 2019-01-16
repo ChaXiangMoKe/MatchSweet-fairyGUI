@@ -24,20 +24,12 @@ namespace Game.UI
         {
             UIPackage.AddPackage("UI/main/main");
             contentPane = UIPackage.CreateObject("main", "game").asCom;
-
             InitCom();
             InitUI();
         }
 
         protected override void OnHide()
         {
-            for (int x = 0; x < PlayerInfo.xColumn; x++)
-            {
-                for (int y = 0; y < PlayerInfo.yRow; y++)
-                {
-                    GameManager.Instance.Sweets[x, y].Hide();
-                }
-            }
         }
 
         /// <summary>

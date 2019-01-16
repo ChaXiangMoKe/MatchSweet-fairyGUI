@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FairyGUI;
 
 
 namespace Game.Data
@@ -27,6 +28,10 @@ namespace Game.Data
         /// 列消除
         /// </summary>
         COLUMN_CLEAR,
+        /// <summary>
+        /// 爆炸
+        /// </summary>
+        EXPLOSION,
         /// <summary>
         /// 全消除
         /// </summary>
@@ -63,7 +68,7 @@ namespace Game.Data
         /// </summary>
         public static int yRow = 10;
 
-        public static PlayerInfo instance;
+        private static PlayerInfo instance;
         public static PlayerInfo Instance
         {
             get
@@ -83,16 +88,20 @@ namespace Game.Data
             _SweetColorDict[ColorType.YELLOW] = "Yellow";
             _SweetColorDict[ColorType.PURPLE] = "Purple";
             _SweetColorDict[ColorType.RED] = "Red";
-            _SweetColorDict[ColorType.BLUE] = "Blues";
+            _SweetColorDict[ColorType.BLUE] = "Blue";
             _SweetColorDict[ColorType.GREEN] = "Green";
             _SweetColorDict[ColorType.PINK] = "Pink";
             _SweetColorDict[ColorType.ANY] = "Colors";
             _SweetColorDict[ColorType.COUNT] = "";
         }
 
-        public string GetSweetColor()
+        public ColorType GetSweetColor()
         {
-            return _SweetColorDict[(ColorType)(Random.Range(0, (int)ColorType.COUNT))];
+            return (ColorType)Random.Range(0, 5);
+        }
+        public string GetSweetColorUrl(ColorType color)
+        {
+            return UIPackage.GetItemURL("main", _SweetColorDict[(ColorType)color]);
         }
     }
 }
