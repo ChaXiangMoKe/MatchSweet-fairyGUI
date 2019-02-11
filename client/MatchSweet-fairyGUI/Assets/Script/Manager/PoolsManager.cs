@@ -55,4 +55,9 @@ public class PoolsManager
     {
         poolDict[type].Store(obj);
     }
+
+    public void GetPoolNum(PoolType type)
+    {
+        RGLog.Log( "type :"+type + " Num :" + poolDict[type].GetPoolNum());
+    }
 }

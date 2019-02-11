@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="100,100">
-  <controller name="SweetsType" pages="0,EMPTY,1,NORMAL,2,BARRIER,3,ROW_CLEAR,4,COLUMN_CLEAR,6,EXPLOSION,5,RAINBOWCANDY" selected="5">
+  <controller name="SweetsType" pages="0,EMPTY,1,NORMAL,2,BARRIER,3,ROW_CLEAR,4,COLUMN_CLEAR,6,EXPLOSION,5,RAINBOWCANDY" selected="0">
     <action type="play_transition" fromPage="" toPage="3" transition="ROW_CLEAR"/>
     <action type="play_transition" fromPage="" toPage="4" transition="COLUMN_CLEAR"/>
     <action type="play_transition" fromPage="" toPage="5" transition="RAINBOWCANDY"/>
@@ -23,15 +23,18 @@
     </image>
   </displayList>
   <transition name="ROW_CLEAR">
+    <item time="0" type="Alpha" target="n0_po1o" value="1"/>
     <item time="0" type="XY" target="n0_po1o" tween="true" startValue="-5,0" endValue="5,0" duration="6" ease="Linear" repeat="-1" yoyo="true"/>
   </transition>
   <transition name="COLUMN_CLEAR">
+    <item time="0" type="Alpha" target="n0_po1o" value="1"/>
     <item time="0" type="XY" target="n0_po1o" tween="true" startValue="0,-5" endValue="0,5" duration="6" ease="Linear" repeat="-1" yoyo="true"/>
   </transition>
   <transition name="RAINBOWCANDY" autoPlayRepeat="-1">
+    <item time="0" type="Alpha" target="n0_po1o" value="1"/>
     <item time="0" type="Rotation" target="n3_hsvo" tween="true" startValue="0" endValue="360" duration="18" ease="Linear" repeat="-1"/>
   </transition>
-  <transition name="normal_clear">
+  <transition name="normal_clear" options="6">
     <item time="0" type="Alpha" target="n0_po1o" tween="true" startValue="1" endValue="0" duration="12" ease="Linear"/>
   </transition>
 </component>

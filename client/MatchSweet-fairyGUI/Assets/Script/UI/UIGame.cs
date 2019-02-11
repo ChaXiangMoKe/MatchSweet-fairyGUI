@@ -12,6 +12,7 @@ namespace Game.UI
         private GTextField scote_text;
         private GButton return_button;
         private GComponent parents_com;
+
         public GComboBox ParentsCom
         {
             get
@@ -41,6 +42,7 @@ namespace Game.UI
             scote_text = contentPane.GetChild("scote_text").asTextField;
             return_button = contentPane.GetChild("return_btn").asButton;
             parents_com = contentPane.GetChild("parents").asCom;
+            
         }
 
         /// <summary>
@@ -49,10 +51,10 @@ namespace Game.UI
         private void InitUI()
         {
             return_button.onClick.Set(OnReturnClick);
-            GameManager.Instance.Sweets = new GameSweet[PlayerInfo.xColumn, PlayerInfo.yRow];
-            for (int x = 0; x < PlayerInfo.xColumn; x++)
+            GameManager.Instance.Sweets = new GameSweet[PlayerInfo.Instance.xColumn, PlayerInfo.Instance.yRow];
+            for (int x = 0; x < PlayerInfo.Instance.xColumn; x++)
             {
-                for(int y = 0; y < PlayerInfo.yRow; y++)
+                for (int y = 0; y < PlayerInfo.Instance.yRow; y++)
                 {
                     GameSweet gameSweet = PoolsManager.Instance.GetSweetObj();
                     gameSweet.InitSweet(parents_com);
@@ -61,14 +63,27 @@ namespace Game.UI
                 }
             }
             GameManager.Instance.StartFill();
-            
+
         }
 
         private void OnReturnClick()
         {
-            GameManager.Instance.StartUIShow();
-            this.Dispose();
+            //GameManager.Instance.StartUIShow();
+            //this.Dispose();
+            //GameManager.Instance.Fill();
+            for (int y = 0; y < PlayerInfo.Instance.yRow; y++)
+            {
+                for (int x = 0; x < PlayerInfo.Instance.xColumn; x++)
+                {
+                    GameSweet sweet = GameManager.Instance.Sweets[x, y];
+                    if (x != sweet.X || y != sweet.Y)
+                    {
+                        Debug.Log("x :" + x + "  y :" + y);
+                        Debug.Log("sx :" + sweet.X + "  sy :" + sweet.Y);
+                    }
+                }
+            }
         }
-       
+
     }
 }

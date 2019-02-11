@@ -54,35 +54,27 @@ namespace Game.Data
             set { _sweet = value; }
         }
 
-        private ColorType _Color;
+        private ColorType _color;
         public ColorType Color
         {
-            get { return _Color; }
+            get { return _color; }
             set
             {
-                if (_type == SweetsType.NORMAL)
+
+                if (_type == SweetsType.BARRIER || _type == SweetsType.COUNT || _type==SweetsType.EMPTY )
                 {
-                    _Color = value;
-                    _loader.url =  PlayerInfo.Instance.GetSweetColorUrl(_Color);
+                    _color = ColorType.COUNT;
                 }
                 else
                 {
-                    _Color = ColorType.COUNT;
+                    _color = value;
+                    _loader.url = PlayerInfo.Instance.GetSweetColorUrl(_color);;
                 }
+
             }
         }
-
-        private bool _IsMove;
-        public bool IsMove
-        {
-            get { return _IsMove; }
-        }
-
-        private bool _IsClear;
-        public bool IsClear
-        {
-            get { return _IsClear; }
-        }
+        public bool IsMove { get; private set; }
+        public bool IsClear { get; private set; }
 
         private FairyGUI.Controller _SweetCon;
         private GLoader _loader;
@@ -96,6 +88,8 @@ namespace Game.Data
             _loader = _sweet.GetChild("icon").asLoader;
             _normalClearTra = _sweet.GetTransition("normal_clear");
             _sweet.visible = true;
+            _sweet.onTouchBegin.Set(OnStart);
+            _sweet.onTouchEnd.Set(OnEnd);
         }
 
         public void InitSweet(GComponent parents)
@@ -124,31 +118,52 @@ namespace Game.Data
         {
             _type = type;
             _SweetCon.SetSelectedIndex((int)type);
-            _Color = ColorType.COUNT;
             switch (type)
             {
                 case SweetsType.EMPTY:
                     {
-                        _IsMove = true;
-                        _IsClear = false;
-
+                        IsMove = false;
+                        IsClear = false;
+                        _color = ColorType.COUNT;
                     }
                     break;
                 case SweetsType.NORMAL:
                     {
-                        _IsMove = true;
-                        _IsClear = true;
-
+                        IsMove = true;
+                        IsClear = true;
+                        _loader.alpha = 1;
                         Color = PlayerInfo.Instance.GetSweetColor();
                     }
                     break;
                 case SweetsType.ROW_CLEAR:
+                    {
+                        IsMove = true;
+                        IsClear = true;
+                    }
                     break;
                 case SweetsType.COLUMN_CLEAR:
+                    {
+                        IsMove = true;
+                        IsClear = true;
+                    }
                     break;
                 case SweetsType.EXPLOSION:
+                    {
+                        IsMove = true;
+                        IsClear = true;
+                    }
                     break;
                 case SweetsType.RAINBOWCANDY:
+                    {
+                        IsMove = true;
+                        IsClear = true;
+                    }
+                    break;
+                case SweetsType.BARRIER:
+                    {
+                        IsMove = false;
+                        _color = ColorType.COUNT;
+                    }
                     break;
             }
         }
@@ -159,7 +174,7 @@ namespace Game.Data
             Vector2 newPos = ChangePostion(newX, newY);
             X = newX;
             Y = newY;
-            Tween _tween = DOTween.To(() => oldPos, pos =>
+            DOTween.To(() => oldPos, pos =>
             {
                 try
                 {
@@ -169,10 +184,7 @@ namespace Game.Data
                 {
                     RGLog.Warn(e);
                 }
-            }, newPos, time).OnComplete(() =>
-            {
-
-            });
+            }, newPos, time);
 
         }
 
@@ -182,13 +194,12 @@ namespace Game.Data
         /// <returns></returns>
         public bool IsMatch()
         {
-            if (_type == SweetsType.NORMAL)
+            if (_type == SweetsType.NORMAL||_type == SweetsType.COLUMN_CLEAR ||_type == SweetsType.ROW_CLEAR||_type == SweetsType.RAINBOWCANDY||_type==SweetsType.EXPLOSION)
             {
-                if (_Color == ColorType.COUNT)
+                if (_color != ColorType.COUNT)
                 {
-                    return false;
-                }
-                return true;
+                    return true;
+                }      
             }
             return false;
         }
@@ -200,7 +211,6 @@ namespace Game.Data
 
         public void Hide()
         {
-            _loader.alpha = 1;
             _sweet.visible = false;
             PoolsManager.Instance.HideObj(PoolType.GameSweet, this);
             _parents.RemoveChild(_sweet);
@@ -208,36 +218,64 @@ namespace Game.Data
 
         public void Clear()
         {
-           if(_IsClear)
+            if (!IsClear) return;
+            switch (_type)
             {
-                switch (_type)
-                {
-                    case SweetsType.NORMAL:
-                        {
-                            _normalClearTra.Play();
-                            _type = SweetsType.EMPTY;
-                        }
-                        break;
-                }
-
+                case SweetsType.NORMAL:
+                    {
+                        _normalClearTra.Play();
+                    }
+                    break;
+                case SweetsType.ROW_CLEAR:
+                    {
+                        _normalClearTra.Play();
+                    }
+                    break;
+                case SweetsType.COLUMN_CLEAR:
+                    {
+                        _normalClearTra.Play();
+                    }
+                    break;
+                case SweetsType.EXPLOSION:
+                    {
+                        _normalClearTra.Play();
+                    }
+                    break;
+                case SweetsType.RAINBOWCANDY:
+                    {
+                        _normalClearTra.Play();
+                    }
+                    break;
             }
+            _type = SweetsType.EMPTY;
         }
         public void Reset()
         {
             _sweet.visible = true;
             _parents.AddChild(_sweet);
             SetSweetsType(SweetsType.EMPTY);
+            if (_normalClearTra.playing)
+            {
+                _normalClearTra.Stop();
+            }
             x = 0;
             y = 0;
         }
 
         public void OnStart()
         {
-
+            GameManager.Instance.PressSweet(this);
+            RGLog.Log(ToString());
         }
 
         public void OnEnd()
         {
+            GameManager.Instance.EnterSweet(this);
+        }
+
+        public override string ToString()
+        {
+            return "[x] " + x + "[y] "+y+"[type] "+Type+"[color]"+Color+" [alpha] "+_loader.alpha;
 
         }
     }

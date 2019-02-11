@@ -15,6 +15,8 @@ public abstract class Pool
     public abstract T Create<T>() where T : class,new();
 
     public abstract void Store(object obj);
+
+    public abstract int GetPoolNum();
 }
 
 public class PoolNormal:Pool
@@ -52,6 +54,11 @@ public class PoolNormal:Pool
     public override void Store(object obj)
     {
         m_objectSatck.Push(obj);
+    }
+
+    public override int GetPoolNum()
+    {
+        return m_objectSatck.Count;
     }
 }
 
@@ -91,6 +98,11 @@ public class ResetPool<R> : Pool where R :class,IResetable,new()
     public override void Store(object obj)
     {
         m_objectSatck.Push(obj);
+    }
+
+    public override int GetPoolNum()
+    {
+        return m_objectSatck.Count;
     }
 }
 
