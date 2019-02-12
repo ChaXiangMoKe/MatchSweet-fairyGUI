@@ -2,15 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RGResource : MonoBehaviour {
+public class RGResource
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public const string ROOT_PATH = "Assets/Build/";
 }

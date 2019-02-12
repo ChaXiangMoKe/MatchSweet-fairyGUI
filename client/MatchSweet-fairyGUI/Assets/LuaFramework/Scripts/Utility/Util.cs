@@ -192,10 +192,14 @@ namespace LuaFramework {
                 if (Application.isMobilePlatform) {
                     return Application.persistentDataPath + "/" + game + "/";
                 }
-                if (Application.platform == RuntimePlatform.WindowsPlayer) {
-                    return Application.streamingAssetsPath + "/";
-                }
-                if (AppConst.DebugMode && Application.isEditor) {
+                //if (Application.platform == RuntimePlatform.WindowsPlayer) {
+                //    return Application.streamingAssetsPath + "/";
+                //}
+                //if (AppConst.DebugMode && Application.isEditor) {
+                //    return Application.streamingAssetsPath + "/";
+                //}
+                if (AppConst.DebugMode)
+                {
                     return Application.streamingAssetsPath + "/";
                 }
                 if (Application.platform == RuntimePlatform.OSXEditor) {
