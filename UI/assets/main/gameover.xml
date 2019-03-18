@@ -14,7 +14,7 @@
     <image id="n12_dlzc" name="n12" src="dlzch" fileName="image/ui/game/bubbles/PurpleBubble.png" xy="306,748"/>
     <image id="n13_dlzc" name="n13" src="dlzci" fileName="image/ui/game/bubbles/YellowBubble.png" xy="679,321"/>
     <component id="n14_dlzc" name="return_main" src="dlzc1f" fileName="component/return_main.xml" xy="891,657" size="200,200" aspect="true"/>
-    <text id="n15_dlzc" name="n15" xy="371,875" size="415,124" fontSize="100" color="#ffffff" strokeColor="#dfa6d2" text="最终得分"/>
+    <text id="n15_dlzc" name="n15" xy="371,875" size="415,124" fontSize="100" color="#ffffff" strokeColor="#dfa6d2" text="得分"/>
     <text id="n16_dlzc" name="finalScore_text" xy="471,1052" pivot="0.5,0.5" size="210,112" fontSize="90" color="#ffffff" align="center" vAlign="middle" strokeColor="#dfa6d2" text="3000"/>
     <component id="n17_dlzc" name="replay_btn" src="dlzc1g" fileName="component/replay_btn.xml" xy="367,1202"/>
   </displayList>

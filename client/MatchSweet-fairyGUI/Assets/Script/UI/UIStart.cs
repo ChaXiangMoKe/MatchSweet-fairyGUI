@@ -12,7 +12,14 @@ namespace Game.UI
 
         protected override void OnShown()
         {
-            UIPackage.AddPackage("UI/main/main");
+           
+            RGResource.LoadUIAsync("UI/main/main", LoadStartPackageComplete);
+
+        }
+
+        public void LoadStartPackageComplete(AssetBundle ab, LoadEventData evData)
+        {
+            UIPackage.AddPackage(ab);
             contentPane = UIPackage.CreateObject("main", "start").asCom;
 
             InitCom();
